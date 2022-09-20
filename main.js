@@ -1,5 +1,5 @@
-import { Blockchain } from './Blockchain.js';
-import { Transaction } from './Transaction.js';
+import { Blockchain } from './blockchain.js';
+import { Transaction } from './transaction.js';
 
 let savjeeCoin = new Blockchain();
 savjeeCoin.createTransaction(new Transaction('address1', 'address2', 100));
