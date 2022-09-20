@@ -1,14 +1,16 @@
 import { Blockchain } from './Blockchain.js';
+import { Transaction } from './Transaction.js';
 
 let savjeeCoin = new Blockchain();
-console.log('Mining block 1...');
-savjeeCoin.addBlock("10/07/2017", { amount: 4 });
-console.log('Mining block 2...');
-savjeeCoin.addBlock("12/07/2017", { amount: 10 });
+savjeeCoin.createTransaction(new Transaction('address1', 'address2', 100));
+savjeeCoin.createTransaction(new Transaction('address2', 'address1', 50));
 
+console.log('\n Starting the miner...');
+savjeeCoin.minePendingTransactions('xaviers-address');
 
-//console.log(JSON.stringify(coin, null, 4));
-//console.log('Is blockchain valid? ' + savjeeCoin.isChainValid());
-//savjeeCoin.chain[1].data = { amount: 100 };
-//savjeeCoin.chain[1].hash = savjeeCoin.chain[1].calculateHash();
-//console.log('Is blockchain valid? ' + savjeeCoin.isChainValid());
+console.log('\nBalance of xavier is ', savjeeCoin.getBalanceOfAddress('xaviers-address'));
+
+console.log('\n Starting the miner again...');
+savjeeCoin.minePendingTransactions('xaviers-address');
+
+console.log('\nBalance of xavier is ', savjeeCoin.getBalanceOfAddress('xaviers-address'));
