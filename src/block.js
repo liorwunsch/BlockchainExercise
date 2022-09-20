@@ -1,6 +1,6 @@
-import sha256 from 'crypto-js/sha256.js';
+const SHA256 = require('crypto-js/sha256');
 
-export class Block {
+class Block {
     constructor(timestamp, transcations, previousHash = '') {
         this.timestamp = timestamp;
         this.transcations = transcations;
@@ -10,7 +10,7 @@ export class Block {
     }
 
     calculateHash() {
-        return sha256(this.previousHash + this.timestamp
+        return SHA256(this.previousHash + this.timestamp
             + JSON.stringify(this.transcations) + this.nonce).toString();
     }
 
@@ -23,3 +23,5 @@ export class Block {
         console.log("Block mined: " + this.hash)
     }
 }
+
+module.exports.Block = Block;

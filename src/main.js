@@ -1,5 +1,5 @@
-import { Blockchain } from './blockchain.js';
-import { Transaction } from './transaction.js';
+const {Blockchain} = require('./blockchain')
+const {Transaction} = require('./transaction')
 
 let savjeeCoin = new Blockchain();
 savjeeCoin.createTransaction(new Transaction('address1', 'address2', 100));

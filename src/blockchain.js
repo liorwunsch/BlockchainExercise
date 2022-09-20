@@ -1,7 +1,7 @@
-import { Block } from './block.js';
-import { Transaction } from './transaction.js';
+const {Block} = require('./block')
+const {Transaction} = require('./transaction')
 
-export class Blockchain {
+class Blockchain {
     constructor() {
         this.chain = [this.createGenesisBlock()];
         this.difficulty = 2;
@@ -67,3 +67,5 @@ export class Blockchain {
         return true;
     }
 }
+
+module.exports.Blockchain = Blockchain;
