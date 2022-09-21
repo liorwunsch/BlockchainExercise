@@ -22,7 +22,7 @@ class Blockchain {
 
     minePendingTransactions(miningRewardAddress) {
         let timestamp = Date.now();
-        let block = new Block(timestamp, this.pendingTransactions);
+        let block = new Block(timestamp, this.pendingTransactions, this.chain[this.chain.length - 1].hash);
         block.mineBlock(this.difficulty);
 
         console.log('Block successfully mined!');
@@ -33,7 +33,13 @@ class Blockchain {
         ];
     }
 
-    createTransaction(transcation) {
+    addTransaction(transcation) {
+        if (!transcation.fromAddress || !transcation.toAddress || transcation.fromAddress == null) {
+            throw new Error('Transaction must include from and to addresses!');
+        }
+        if (!transcation.isValid()) {
+            throw new Error('Cannot add invalid transaction to chain!');
+        }
         this.pendingTransactions.push(transcation);
     }
 
@@ -57,6 +63,9 @@ class Blockchain {
             const block = this.chain[i];
             const prevBlock = this.chain[i - 1];
 
+            if (!block.hasValidTransactions()) {
+                return false;
+            }
             if (block.hash !== block.calculateHash()) {
                 return false;
             }
